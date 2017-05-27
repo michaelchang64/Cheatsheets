@@ -1,0 +1,571 @@
+Learning R
+
+Basic Features
+ - Case-sensitive
+ - has console thing
+Advantages
+ - Open source
+ - good graphics
+ - command line interface
+ - reproducibility through r scripts
+ - r packages: extensions of R
+ - big online community
+Disadvantages
+ - easy to learn, hard to master
+ - command-line interface daunting? nahhhh
+ - poorly written code hard to read/maintain
+ - poorly written code slow with large datasets
+
+Documentation: access at rdocumentation.org
+
+Comments: prefaced by #
+
+Workspace: place where variables and information is stored in R
+ - ls(): shows list of all variables created in R session
+ - rm(var_name): removes variable(s) from workspace 
+
+R Scripts: text file with R commands that automate your work and make it easier to reproduce
+ - goes line by line to run commands
+
+Value assignment: var_name <- 4.0
+
+Types of values
+ - numeric: java or sql's equivalent of a double or int
+ 	- to explicitly make an integer attach L next to number
+ 	- an integer is numeric, numeric not always integer
+ - character: equivalent to string or char, surrounded by ""
+ - logical: equivalent to booleans, must be capitalized
+ - double: higher precision numbers
+ - complex: complex numbers
+ - raw: stores raw bytes
+
+is.numeric(input): returns logical to show whether input is of numeric type or not
+
+is.integer(input): returns logical to show whether input is of integer type or not
+
+class(): use to reveal type
+
+Printing values on console
+ - type in name of variable and press enter
+Ex:
+# Input
+> some_var <- 3
+> some_var
+# Output
+> 3
+
+Arithmetic functions
+ - +
+ - -
+ - /
+ - *
+ - ^
+ - %% (not %)
+
+Coercion (R equivalent of casting?)
+ - as.numeric(TRUE) returns 1
+ - as.numeric(FALSE) returns 0
+ - as.character(4) returns "4" which is character
+ - as.numeric("4.5") returns 4.5
+ - as.integer("4.5") returns 4
+ - IMPORTANT: not all values can be coerced into other datatypes
+
+Vectors
+ - basically 1d arrays
+ - can only hold elements of the same type
+ 	- if vector with different elements created, then R will try to coerce values into same type
+
+ 	Ex:
+ 	> drawn_ranks <- c(7, 4, "A", 10, "K", 3, 2, "Q")
+ 	> drawn_ranks
+ 	[1] "7"  "4"  "A"  "10"  "K"  "3"  "2"  "Q"
+ 	> class(drawn_ranks)
+ 	[1] "character"
+ 	# shows above vector is a character
+
+ - another name for vectors is "atomic vectors"
+ - not zero-indexed, starts at 1
+ - c(): function to hold values within
+ 
+Naming vectors: 3 methods
+ - name(vector_name1) <- vector_name2 function to name elements
+ - remain <- c(spades = 11, hearts = 12, diamonds = 11, clubs = 13)
+ - remain <- c("spades" = 11, "hearts" = 12, "diamonds" = 11, "clubs" = 13)
+Ex:
+	# Input
+	> some_vector <- c("cookie", "cadillac", "miles")
+	> name(some_vector) <- c("Food", "Car", "Units")
+	> some_vector
+	# Output
+		Food		Car 		Units
+		cookie		cadillac	miles
+
+str(vector_name): shows the names of columns in vector
+
+* all variables are vectors themselves, most of length 1
+
+my_apples <- 5
+is.vector(my_apples) returns TRUE
+
+length(vector_name): shows length of vector
+
+Selecting elements in vector (called subsetting)
+ - to select elements:
+	 # select first element
+	 > some_vector[1]
+ - to select multiple elements:
+	 # select first and fifth elements
+	 > some_vector[c(1, 5)]
+ - can also select elements within inclusive range:
+	 # select first through fifth elements
+	 > some_vector[c(1:5)]
+ - can also select elements based on name (: doesn't work unfortunately)
+ 	 # select values for Wednesday and Friday
+ 	 > some_vector[c("Wednesday", "Friday")]
+ - subset all but some
+ 	 # exclude values for Wednesday and Friday
+ 	 > some_vector[-c(3, 4)]
+ 	 # exclude values for first element only
+ 	 > some_vector[-1]
+ - subset using logical vector
+ 	 # make values for Monday and Tuesday remain
+ 	 > some_vector[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
+ - subset using logical vector concept called recycling (will repeat pattern)
+ 	 > some_vector[c(TRUE, FALSE)]
+ 	 # R recycles c(T, F) to c(T, F, T, F, T)
+ 	 # if c(T, F, T) then recycled to c(T, F, T, T, F, T,...)
+
+is.vector(vector_name): verifies if variable is of vector type
+
+Vector Addition
+A_vector <- c(1, 2, 3)
+B_vector <- c(4, 5, 6)
+total_vector <- A_vector + B_vector
+total_vector (outputs 5 7 9)
+ - after naming both vectors can add then get the result with corresponding names
+
+sum() function
+ - adds up all things in vector
+ - no name, but returns desired value
+
+mean() function
+ - get average value using mean()
+
+Comparison operators (>, <, <=, >=, ==, !=)
+ - can compare variables, returns a logical
+ - can use on vectors
+Ex:
+	> c(4, 5, 6) > 5
+	[1] FALSE FALSE TRUE
+ 	
+ 	# or
+
+ 	> # Poker and roulette winnings from Monday to Friday:
+	> poker_vector <- c(140, -50, 20, -120, 240)
+	> roulette_vector <- c(-24, -50, 100, -350, 10)
+	> days_vector <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+	> names(poker_vector) <- days_vector
+	> names(roulette_vector) <- days_vector
+	> 
+	> # Which days did you make money on poker?
+	> selection_vector <- poker_vector > 0
+	> 
+	> # Print out selection_vector
+	> selection_vector
+	   Monday   Tuesday Wednesday  Thursday    Friday 
+	     TRUE     FALSE      TRUE     FALSE      TRUE
+
+Selection by comparison
+ - if certain values are true then only those values considered true will be used as values
+ Ex:
+ 	> # Which days did you make money on poker?
+	> selection_vector <- poker_vector > 0
+	> # Select from poker_vector these days
+	> poker_winning_days <- poker_vector[selection_vector]
+	> poker_winning_days
+	   Monday Wednesday    Friday 
+	      140        20       240
+
+Using ? in front of functions without spaces for usage
+ - exactly like mathematica
+
+Using summary() function for data structures
+ - vectors: shows length, class, and mode
+ - factors: shows number of categorical variables for each category
+
+Subsetting a Vector using Logicals and Counting
+
+roulette_vector <- c(34, 5, -134, 1345, 23)
+
+# count how many earnings are greater than 100: n_greater_hundred
+> n_greater_hundred <- sum(roulette_vector > 100)
+
+Matrices
+
+	Matrix Creation
+
+		Create a Matrix: recycling
+		 - R could apply same principle as recycling with logical vectors when subsetting vectors
+		 - fills it up column by column by default
+
+		> matrix(1:3, nrow = 2, ncol = 3)
+		      [,1]  [,2]  [,3]
+		[1,]     1     3     2
+		[2,]     2     1     3
+
+		 - if vector whose length is not multiple of number of elements in matrix then R generates warning message
+
+		Combining vectors together to create matrices using rbind() and cbind()
+		 - cbind() creates matrix by column
+		 - rbind() creates matrix by row
+		 - also can use either to append row or column of same length of matrix row or column to matrix
+
+		> cbind(1:3, 1:3)
+		      [,1]  [,2]
+		[1,]     1     1
+		[2,]     2     2
+		[3,]     3     3
+
+		> rbind(1:3, 1:3)
+		      [,1]  [,2]  [,3]
+		[1,]     1     2     3
+		[2,]     1     2     3
+
+	Naming Matrices
+
+		Naming matrices using rowname() and colnames()
+		 - rowname(matrix_name) <- c("row1", "row2")
+		 - colname(matrix_name) <- c("col1", "col2")
+
+		Naming matrices using dimnames() argument
+		 - dimnames = list(c("row1", "row2"), c("col1", "col2", "col3")
+
+		Coercion in matrices
+		 - coerced to character type if all aren't same data type
+
+	Getting rowSums() and colSums()
+	 - vector_name <- rowSums(matrix_name)
+	 - vector_name <- colSums(matrix_name)
+
+	Subsetting Matrices
+
+		Subsetting Elements in Matrix
+		 - matrix_name[row_num, col_num]
+		 - matrix_name[num] # going from up and down columns left to right
+
+		Subset Whole Row or Column in Matrix
+		 - row: matrix_name[row_num,] # this code is complete
+		 - col: matrix_name[,col_num] # this code is complete
+
+		Subset Multiple Matrix Elements
+		 - use c() vector function
+		 - not possible to combine row/col names and element values within c()
+		 # Get elements in 3rd row 3rd, 5th, and 8th values
+		 > matrix_name(3, c(3, 5, 8))
+
+		Submatrix Subsetting
+		 # get second and third rows and the 3rd and 4th elements
+		 > matrix_name(c(2, 3), c(3, 4))
+
+		Subsetting Matrices by Name
+		 - matrix_name("row_name", "col_name")
+
+		Subsetting Matrices by Logical Vector
+		 - vector recycling also apply
+		 - matrix_name(c(TRUE, FALSE, FALSE), c(FALSE, TRUE, FALSE, FALSE))
+
+		Sequences using seq()
+		 - seq(min, max, by = step)
+
+	Matrix Arithmetic
+
+		Matrix Scalar Operations
+		 - arithmetic operations performed element-wise
+		# all elements of matrix_name divided by num
+		> matrix_name / num
+		# all elements of matrix_name added by num
+		> matrix_name + num
+
+		Matrix-Matrix Operations
+		 - have same dimensions, go corresponding element by element
+		 - if vector has length that is multiple of matrix number of elements then recycling occurs
+
+		Matrix Multiplication
+		 - linear algebra?
+		 - element-wise
+
+Similarities and Differences of Matrices and Vectors
+ - Vector: 1D, Matrix: 2D
+ - Coercion if necessary
+ - Recycling if necessary
+
+Factors
+	
+	Categorical Variables
+	 - limited number of different values
+	 - belong to category
+	 - in R: stored in factor
+
+	Use factor() to store categorical variables
+	 - in character vector R scans for different types of categories
+
+		Ex: blood type
+		# Survey of 8 people for their blood types
+		> blood <- c("B", "AB", "O", "A", "O", "O", "A", "B")
+		> blood
+		[1]  "B"  "AB"  "O"  "A"  "O"  "O"  "A"  "B"
+
+		> blood_factor <- factor(blood)
+		> blood_factor
+		[1]  B  AB  O  A  O  O  A  B
+		Levels: A  AB  B  O
+	 - inspecting structure of factored vector shows following:
+	 	> str(blood_factor)
+	 	Factor w/ 4 levels "A", "AB", "B", "O": 3 2 4 1 4 4 1 3
+	 - numbers correspond to factor level number–3 corresponds to "B" factor level
+
+	Advantage of factor()
+	 - if using long characters, could use up lots of memory
+	 - with factoring categorizing saves lots of memory
+	 - factors are integer vectors, each integer corresponds to category, or level
+
+	Order Levels Differently
+	 - by default R orders factor levels alphabetically
+	 - to order differently, can specify factor levels explicitly within parameters of factor() function
+
+	 	Ex: blood types again
+	 	> blood_factor2 <- factor(blood, levels = c("O", "A", "B", "AB"))
+	 	> blood_factor2
+	 	[1]  B  AB  O  A  O  O  A  B
+		Levels: O  A  AB  B
+
+		> str(blood_factor)
+		Factor w/ 4 levels "A", "AB", "B", "O": 3 2 4 1 4 4 1 3
+
+		> str(blood_factor2)
+		Factor w/ 4 levels "O", "A", "AB", "B": 3 4 1 2 1 1 2 3
+
+	Rules for Renaming Factor Levels
+	 - must follow order of factor levels
+	 - in the event of mistake of changing order, use combo of levels and labels args within factor()
+
+	Renaming Factor Levels After running factor() using levels()
+	 - levels(factor_vector_name) <- c("category_1", "category_2", "category_3",...)
+
+	Renaming factor levels by passing variables into labels argument within factor() function
+	 - factor(vector_name, labels = c("category_1", "category_2", "category_3",...))
+
+	Renaming and reordering factor levels with both levels and labels args
+	 - factor(vector_name,
+	 		  levels = c("category_1", "category_2", "category_3",...),
+	 		  labels = c("cat1", "cat2", "cat3",...))
+
+	Nominal vs. Ordinal Categorical Variables
+	 - nominal has no order, so one category cannot be greater or lesser than others
+	 - ordinal vector orders factor levels
+
+	Creating ordinal levels in factor
+	 - set ordered arg to TRUE
+	 - levels should be specified in ascending order 
+
+		Ex: t-shirts
+		> tshirt <- c("M", "L", "S", "S", "L", "M", "L", "M")
+
+		> tshirt_factor <- factor(tshirt, ordered = TRUE, levels = c("S", "M", "L"))
+		
+		> tshirt_factor
+		[1] M L S S L M L M
+		Levels: S < M < L
+		
+		> tshirt_factor[1] > tshirt_factor[2]
+		[1] FALSE
+
+Lists
+	
+	List Properties
+	 - can contain all types of R objects including:
+	 	* vectors
+	 	* matrices
+	 	* dates
+	 	* data frames
+	 	* factors
+	 	* other lists!!!
+	 	* and more!
+	 - stores R objects without coercion
+	 - however, loses properties that vectors and matrices have
+	 	* performing calculus with lists more difficult
+
+	Storing values in list using list() function
+
+		Ex: Rsome times song stuff
+
+		# Title: rsome times, 190 seconds, 5th on record
+		> list("rsome times", 190, 5)
+		[[1]]
+		[1] "rsome times"
+
+		[[2]]
+		[1] 190
+
+		[[3]]
+		[1] 5
+
+	Naming stuff in list
+
+		Name with names() function
+		 - names(list_name) <- c("name1", "name2",...)
+		 	Ex: rsome times
+
+		 	> names(song) <- c("title", "duration", "track")
+			> song
+			$title
+			[1] "rsome times"
+
+			$duration
+			[1] 190
+
+			$track
+			[1] 5
+
+		Name within list()
+			Ex: rsome times
+
+			> song <- list(title = "rsome times", duration = 190, track = 5)
+			> song
+			$title
+			[1] "rsome times"
+
+			$duration
+			[1] 190
+
+			$track
+			[1] 5
+
+	Use str() to view structure of list
+	 - more compact and simple than printing out list
+		
+		Ex: rsome times
+		> str(song)
+		List of 3
+		 $ title   : chr "rsome times"
+		 $ duration: num 190
+		 $ track   : num 5
+
+	Subsetting Lists
+
+		Use [[]] to extract individual elements
+		 - [] extracts particular element in list form
+		 - [[]] extracts element in natural form
+
+		Subsetting multiple elements
+		 - list_name[c(1,2)] extracts first and second elements of list in list format
+		 - list_name[[c(1,2)]] returns error!!!
+		 	* [[]] only used to select single elements from lists
+
+		Subsetting element from list within list or vectors
+		 - 
+		 # list within list is stored in 5th element
+		 > list_name[[5]][[4]]
+		 # alternative method
+		 > list_name[[c(5, 1)]]
+
+		Subsetting by name
+		 - list_name[["name"]]
+		 - list_name["name"] for list version
+
+		Subsetting by logical
+		 - can only work with [] not [[]]
+
+		Use $ to select elements
+		 - list_name$name_of_list_item
+			Ex: rsome times
+			
+			> song$duration
+			[1] 190
+
+		Extending Lists
+		 - append list items to end of list
+
+			Extending Lists Using $
+			 - list_name$new_name <- value
+
+			 	Ex: rsome times
+
+			 	> friends <- c("Kurt", "Florence", "Patti", "Dave")
+				> song$sent <- friends
+				> song
+				$title
+				[1] "rsome times"
+
+				$duration
+				[1] 190
+
+				$track
+				[1] 5
+
+				$sent
+				[1] "Kurt"     "Florence" "Patti"    "Dave"
+
+			Extending list items using [[]]
+			 - list_name[[new_name]] <- value
+
+			Extending list with multiple elements at a time using c() function
+			 - c(list_name, my_opinion = "Love it!", your_opinion = "Hate it!")
+			 - c(shining_list, opinions = c("Love it!", "Hate it!"))
+			 - c(shining_list, list(my_opinion = "Love it!", your_opinion = "Hate it!"))
+			 - c(shining_list, list(c("Love it!", "Hate it!")))
+
+Data frames
+	
+	Datasets
+	 - observations
+	 - variables
+	 - example: people
+	 	* each person = observation
+	 	* properties(name, age, ...) = variables
+	 - how to store data conveniently?
+
+	Data frame properties
+	 - specifically for datasets
+	 - rows = observations (persons)
+	 - columns = variables (age, name, ...)
+	 - contain elements of different types
+	 - elements in same colum should have same type
+
+	Creating data frame using imports
+	 - usually import data from another source
+	 	* csv file
+	 	* relational database (e.g. SQL)
+	 	* software packages (Excel, SPSS, ...)
+	
+	Creating data frames using data.frame() function
+		Ex: Data frames
+		> name <- c("Anne", "Pete", "Frank", "Julia", "Cath")
+		> age <- c(28, 30, 21, 39, 35)
+		> child <- c(F, T, T, F, T)
+		> 
+		> df <- data.frame(name, age, child)
+		> 
+		> df
+		   name age child
+		1  Anne  28 FALSE
+		2  Pete  30  TRUE
+		3 Frank  21  TRUE
+		4 Julia  39 FALSE
+		5  Cath  35  TRUE
+
+	Naming variables in data.frame()
+		> df <- data.frame(Name = name, Age = age, Child = child)
+		> df
+		   Name Age Child
+		1  Anne  28 FALSE
+		2  Pete  30  TRUE
+		3 Frank  21  TRUE
+		4 Julia  39 FALSE
+		5  Cath  35  TRUE
+
+	basically lists except all lists have to have equal length
+
+	R stores strings in data frames as factors
+
+	Disable factoring of strings by setting stringsAsFactors = F in data.frame()

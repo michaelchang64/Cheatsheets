@@ -1,0 +1,142 @@
+My L33ty Ch34T Sh33t
+
+IMPORTANT
+
+BEFORE YOU TRY TO DO ANYTHING ELSE THINK IF WHAT YOU ARE GOING TO DO IS EFFICIENT OR NOT
+
+WHEN MAKING COLUMNS WITH EXCEL YOU CAN SAVE A BOATLOAD OF TIME WITH SQL, SO GO WITH SQL WHEN IN DOUBT
+
+In order to get output of id_thing, occurrences, num, and sex, execute following statement:
+
+SELECT iup.id_thing, occurrences, num, sex
+FROM table_thing iup   
+LEFT JOIN standardDb ius ON (iup.id_thing=ius.id_thing)
+WHERE UPPER(ius.sex)='M'
+
+Okay, so when you're trying to find stuff and you encounter a bad bad problem with, e.g., fac = 1384987687, error message returns with:
+
+	No operator matches the given name and argument type(s). You might need to add explicit type casts
+
+Need to CAST() the sucker so types are equal
+
+  integer = integer
+	char = char
+  varchar = varchar
+
+and so forth
+
+*** Also when numbers are funky always cast as int ***
+
+Exporting to .csv file
+
+To export, put in:
+	COPY (
+	SELECT patssn FROM standardDb
+	WHERE
+		fac = CAST (1366547747 AS char(10))
+		AND CAST(pnum AS INTEGER) IN (3615, 3616, 3617)
+	)
+	TO '/Users/mchang/Desktop/test.csv' DELIMITER ',' CSV HEADER;
+
+Main stuff:
+	COPY() TO '/Users/mchang/Desktop/your_file_name.csv' DELIMITER ',' CSV HEADER;
+
+To import
+	1. Create table (I called it id_holder, lol) with columns id, rate, and type.
+	2. cut out parts needed from the crosswalk and save to .csv file with same name as table (drg_mdc.csv in this case)
+	3. Import .csv file into table
+
+	CREATE TABLE table_name (column1 data type, column2 data type);
+
+	COPY table_name FROM 'Users/mchang/Desktop/table_name.csv' DELIMITER ',' CSV HEADER;
+
+To create a table containing the results of a query
+	Use clause 'CREATE TABLE table_name AS' followed by select query or some stuff
+	Can also copy results into table
+
+To delete rows
+	DELETE FROM table_name WHERE blah blah blah
+
+Operators
+	<> or != mean not equal
+
+To find intervals between time
+  date '2001-10-01' - date '2001-09-28'
+
+To find mode:
+  SELECT mode() WITHIN GROUP (ORDER BY some_value) AS modal_value FROM tbl;
+
+To rename column:
+  ALTER TABLE products RENAME COLUMN product_no TO product_number;
+
+To rename table:
+  ALTER TABLE products RENAME TO items;
+
+To edit data
+  UPDATE table_name SET stuff
+
+To add conditions in edited data
+  UPDATE table_name SET column1 = column2 FROM table2
+WHERE
+  table1_column = table2_column;
+
+HOW TO LIST STUFF BASED ON FREQUENCY
+
+SELECT num, COUNT(*) FROM table_name
+GROUP BY num
+ORDER BY COUNT(*) DESC LIMIT 10
+
+To get rid of unnecessary things from your output:
+  SELECT REPLACE(column_name, 'thing_you_want_to_get_rid_of_or_replace', 'what_to_replace_with') FROM table_name
+
+To make changes permanent:
+  UPDATE table_name SET column_name = replace(column_name, 'thing_you_want_to_get_rid_of_or_replace', 'what_to_replace_with')
+
+  --in place of what_to_replace_with can put in '' to delete thing
+
+To get rid of a range of things:
+  REGEXP_REPLACE(column_name, '[^whatever range of things to delete, like 0-9 or a-z]+', 'what_to_replace_with', 'g')
+
+CAST(something AS datatype)
+you can also do: something::datatype
+
+To change column's data type:
+  ALTER TABLE table_name ALTER COLUMN column_name TYPE datatype_here;
+
+To get dates within a certain time interval:
+  column_date < another_column_date::date + interval 'however_many_days_you_want' day AND
+  column_date > another_column_date::date + interval 'however_many_days_you_want' however_many_days_you_want
+
+To round things to nearest n digits:
+  round( CAST(name_of_column 'optional_number' as numeric), n)
+
+To add column:
+  ALTER TABLE table_name ADD COLUMN column_name data_type
+
+To drop column:
+  ALTER TABLE table_name DROP COLUMN column_name;
+
+To add column to a table from another database or backup database:
+  UPDATE schema_name.table_name s1
+    SET gender =  (
+      SELECT column_name FROM schemaname_2.table_name s2
+      WHERE s1.othcolumn_name = s2.othcolumn_name
+                  );
+
+To quickly create a snapshot of a database in another database:
+  CREATE DATABASE db_name TEMPLATE og_db_name; --must close all query windows before
+
+To count how many characters in string
+  char_length(string)
+
+To left stuff
+  left(str text, n int)
+
+To create indexes:
+  CREATE INDEX idx_index_name
+  ON table_name USING hash_or_btree (column_name);
+
+--btree better for filtering, hash better for joins
+
+To cut stuff off from certain point to number of characters you want:
+  substr(id_thing, position_num, how many chars)

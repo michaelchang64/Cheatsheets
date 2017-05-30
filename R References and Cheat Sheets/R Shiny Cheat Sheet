@@ -1,0 +1,21 @@
+R Shiny Cheat Sheet
+
+To Run Shiny Apps
+
+	Locally
+
+	> library(shiny)
+	> runApp()
+
+	On shinyapps.io server
+	 1. get rsconnect package -> install.packages("rsconnect")
+	 2. get authorization info from shinyapps.io server
+	 3. Deploy as follows
+
+	 	> library(rconnect)
+	 	# recommended to set working directory to folder containing your ui.R and server.R
+	 	> rsconnect::deployApp(path/to/your/app)
+
+	Showcase Mode using local to show code on side:
+		> runApp("App-1", display.mode = "showcase")
+	

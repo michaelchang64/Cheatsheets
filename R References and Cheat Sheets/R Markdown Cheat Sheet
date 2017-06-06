@@ -5,3 +5,7 @@ Background
 	 - .Rmd extension
 
 Components of RMarkdown document
+
+Tips and tricks
+	
+	Do not use shorthand F or T in place of FALSE or TRUE because the "object of type 'symbol' is not subsettable" error would appear

@@ -392,6 +392,9 @@ Factors
 		> tshirt_factor[1] > tshirt_factor[2]
 		[1] FALSE
 
+	Convert factor levels to list
+		l <- as.list(levels(factor_name))
+
 Lists
 	
 	List Properties
@@ -607,3 +610,10 @@ Importing files
 	Specify separating character
 
 		read.table()
+
+	For more info read this: https://www.datacamp.com/community/tutorials/r-data-import-tutorial
+
+Time and Date (Timestamp)
+	
+	Sys.time()
+	Sys.Date()

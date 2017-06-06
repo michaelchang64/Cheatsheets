@@ -19,3 +19,7 @@ To Run Shiny Apps
 	Showcase Mode using local to show code on side:
 		> runApp("App-1", display.mode = "showcase")
 	
+Formatting Text Outputs
+	
+	Separating things with new line:
+

@@ -65,6 +65,17 @@ HTML R Shiny
 	To put things in unordered list
 
 		p("* asdlkfjsalfjsdkljf")
+
+Reactive Outputs
+	Output function	creates
+	
+	htmlOutput			raw HTML
+	imageOutput			image
+	plotOutput			plot
+	tableOutput			table
+	textOutput			text
+	uiOutput			raw HTML
+	verbatimTextOutput	text
 	
 Formatting Text Outputs
 	

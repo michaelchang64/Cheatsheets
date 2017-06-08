@@ -617,3 +617,19 @@ Time and Date (Timestamp)
 	
 	Sys.time()
 	Sys.Date()
+
+	Formatting
+		format(Sys.time(), '%B %d, %Y %H:%M:%S')
+
+		%B = month
+		%d = day
+		%Y = year
+		%H = hour
+		%M = minutes
+		%S = seconds
+
+Installing gfortran to download certain packages (OS Mavericks, Yosemite, and below)
+
+	Run the following two lines in terminal:
+		curl -O http://r.research.att.com/libs/gfortran-4.8.2-darwin13.tar.bz2
+		sudo tar fvxz gfortran-4.8.2-darwin13.tar.bz2 -C /

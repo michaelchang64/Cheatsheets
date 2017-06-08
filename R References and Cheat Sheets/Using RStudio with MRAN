@@ -1,0 +1,12 @@
+Using RStudio with MRAN
+
+So MRAN is the Microsoft R Archive Network, and you download an application called Microsoft R Open to improve your computing in 3 ways:
+	 - improved performance
+	 	 - allows for multi-threaded performance, which offers parallel processing power that allows R to use as much available processing power
+	 	 - R was originally designed to be processed single-thread
+	 - reproducibility
+	 	 - packages on CRAN are subject to change daily, and all the updates going on can ultimately affect compatability
+	 	 	 - similar to the dilemma with NPM packages
+	 	 - MRAN solves this solution with its fixed repo of packages that holds snapshots of CRAN packages that are still compatible
+	 	 	 - scroll down to read about the checkpoint package and how that allows you to accomplish the above point
+	 	 - 

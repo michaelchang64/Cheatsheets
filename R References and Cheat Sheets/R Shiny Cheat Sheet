@@ -81,3 +81,52 @@ Formatting Text Outputs
 	
 	Separating things with new line:
 
+Including CSS in Shiny Apps
+	
+	1. Include your raw CSS directly inline in the head of your app
+	2. Include CSS within specific HTML tags
+	3. With a two page app (ui.R and server.R) you can add a folder called www and the app will automatically read any CSS files you’ve included there.
+	4. The shinyjs package (discussed below) also has a useful function called inlineCSS that you can use to add CSS
+	5. Use the includeCSS function to read an external CSS file
+
+observe server function
+	 - should not be used to return data or values
+	 - designed to listen to reactive elements and respond by causing side effects, such as updating text boxes or pull-downs
+	 - two flavors of observe
+	 	1. observe: code inside will get triggered when any of the reactive values inside change
+	 	2. observeEvent: code will only be triggered by specified reactive values
+	 		 - forces you to think through and specify the reactions you want to see
+
+reactive server function
+	 - gets triggered by reactive element like observer
+	 - creates a function and returns results generally saved as an object
+	 - use elsewhere in server as any other R function
+	 - not supposed to generate side effects, should be self-contained
+
+Understanding and controlling when reactive functions get triggered
+	 - If there is no reactive value in the observer the code will run once and never again
+	 - If there is a reactive value in the observer that is uninvolved in any calculations the code will run on app load and then on each change
+
+Since reactive values trigger reactive functions you should keep reactive values separated whenever possible
+
+Font Awesome icons and other icons
+	icon(name, class = NULL, lib = "font-awesome")
+
+	# add an icon to a submit button
+	submitButton("Update View", icon = icon("refresh"))
+
+Methods of storing persistent data remotely with shiny app
+	 - difference between local and remote storage
+	 	 - local: saving a file on same machine running shiny application
+	 	 	 - functions such as write.csv(), write.table(), and saveRDS() implement local storage because will save file on machine running app
+	 	 - remote: saving data on another server <- much more reliable than storing data in local machine because less susceptible to corruption and other bad stuff
+
+Dynamic UI
+	 - 
+
+Errors
+
+	When using includeCSS() and cannot find .css file, returns "Error: cannot open connection"
+
+	"operation not allowed without an active reactive context" error thrown when reactive values are not wrapped in observer, reactive, or render functions
+

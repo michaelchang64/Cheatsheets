@@ -4,9 +4,17 @@ So MRAN is the Microsoft R Archive Network, and you download an application call
 	 - improved performance
 	 	 - allows for multi-threaded performance, which offers parallel processing power that allows R to use as much available processing power
 	 	 - R was originally designed to be processed single-thread
+	 	 - NOTE: multi-threaded performances are primarily focused on optional MRAN math libraries to improve computational performance/speed
+	 	 - more on this here: https://mran.microsoft.com/documents/rro/multithread/
 	 - reproducibility
 	 	 - packages on CRAN are subject to change daily, and all the updates going on can ultimately affect compatability
 	 	 	 - similar to the dilemma with NPM packages
 	 	 - MRAN solves this solution with its fixed repo of packages that holds snapshots of CRAN packages that are still compatible
 	 	 	 - scroll down to read about the checkpoint package and how that allows you to accomplish the above point
-	 	 - 
+ 	 - multi-platform support
+ 	 	 - Windows, Mac, Linux
+
+Checkpoint package
+	 - so you wanna share an R file with a colleague and it requires some packages. so with the packages user created at that time period the packages accomplished a certain task and you want to reproduce the result with the exact same package version
+	 - you would do that with checkpoint, which essentially gets snapshots of packages for the application to use to reproduce said result
+	 - here's how to use checkpoint: https://mran.microsoft.com/documents/rro/reproducibility/#reproducibility

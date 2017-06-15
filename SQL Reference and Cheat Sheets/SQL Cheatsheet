@@ -140,3 +140,13 @@ To create indexes:
 
 To cut stuff off from certain point to number of characters you want:
   substr(id_thing, position_num, how many chars)
+
+When matching stuff use ILIKE (~~*) -- less strict, gets more results
+
+To start at an advanced row, use OFFSET
+
+  OFFSET 58 starts table at row 58
+
+When using pgadmin3 and you want to increase or decrease font size
+  
+  press cmd and scroll up to increase and down to decrease font size

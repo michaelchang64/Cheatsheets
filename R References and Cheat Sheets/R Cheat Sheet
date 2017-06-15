@@ -633,3 +633,9 @@ Installing gfortran to download certain packages (OS Mavericks, Yosemite, and be
 	Run the following two lines in terminal:
 		curl -O http://r.research.att.com/libs/gfortran-4.8.2-darwin13.tar.bz2
 		sudo tar fvxz gfortran-4.8.2-darwin13.tar.bz2 -C /
+
+all() function
+	given a set of logical vectors, are all values true?
+
+Java charAt equivalent:
+	charAt(str, index)

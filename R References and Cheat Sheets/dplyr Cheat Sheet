@@ -1,0 +1,45 @@
+dplyr Cheat Sheet
+
+dplyr verbs		description
+select()		select columns
+filter()		filter rows
+arrange()		re-order or arrange rows
+mutate()		create new columns
+summarise()		summarise values
+group_by()		allows for group operations in the “split-apply-combine” concept
+
+select() function args
+	
+	starts_with() = Select columns that start with a character string
+	ends_with() = Select columns that end with a character string
+	contains() = Select columns that contain a character string
+	matches() = Select columns that match a regular expression
+	one_of() = Select columns names that are from a group of names
+
+filter()
+	
+	try to use %in% when dealing with a list of character values else when you select incontiguous things and you use == to filter then you're only going to get the first block
+
+	ex:
+		# fun list of candies woohoo
+		candies <- list("chocolate", "white chocolate", "lollipop", "jelly beans", "gum")
+
+		# let's say there is a dataframe called candies and has a column called name
+		# I wanna filter chocolates from my list of candies cuz I dunno what is chocolate lol
+		
+		sel.candies <- candies[c(1,2)]
+		
+		chocolates %>%
+			filter(chocolates$name == candies)
+
+		# The above will give you the correct output because chocolate and white chocolate are options that are adjacent to each other
+		# now you want to filter for chocolates and jelly beans
+		
+		sel.candies <- candies[c(1,2,4)]
+		
+		chocolates %>%
+			filter(chocolates$name == candies)
+
+		The previous statement won't work because 
+
+		When you cc someone in email it's kinda like telling them, "You're not my main audience but you can read it anyway.""

@@ -48,7 +48,7 @@ To import
 
 	CREATE TABLE table_name (column1 data type, column2 data type);
 
-	COPY table_name FROM 'Users/mchang/Desktop/table_name.csv' DELIMITER ',' CSV HEADER;
+	COPY table_name FROM '/Users/mchang/Desktop/table_name.csv' DELIMITER ',' CSV HEADER;
 
 To create a table containing the results of a query
 	Use clause 'CREATE TABLE table_name AS' followed by select query or some stuff
@@ -71,6 +71,14 @@ To rename column:
 
 To rename table:
   ALTER TABLE products RENAME TO items;
+
+Adding rows to table:
+  
+  INSERT INTO link (col1, col2)
+    VALUES
+    (val1, val2),
+    (val3, val4),
+    (val5, val6);
 
 To edit data
   UPDATE table_name SET stuff

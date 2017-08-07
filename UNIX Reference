@@ -1,0 +1,9 @@
+UNIX Reference
+
+Logging in, logging out
+
+	whoami <- displays username
+
+	passwd <- change password
+
+	logout <- logs out current session

@@ -639,3 +639,24 @@ all() function
 
 Java charAt equivalent:
 	charAt(str, index)
+
+Java substring equivalent:
+	substr(x, start, stop)
+	substring(text, first, last = 1000000L)
+	substr(x, start, stop) <- value
+	substring(text, first, last = 1000000L) <- value
+
+pattern matching with grepl()
+	grepl(pattern, x, ignore.case = FALSE, perl = FALSE,
+      fixed = FALSE, useBytes = FALSE)
+
+		• pattern: regular expression, or string for fixed=TRUE
+		• x: string, the character vector
+		• ignore.case: case sensitive or not
+		• perl: logical. Should perl-compatible regexps be used? Has priority over extended
+		• fixed: logical. If TRUE, pattern is a string to be matched as is. Overrides all conflicting arguments
+		• useBytes: logical. If TRUE the matching is done byte-by-byte rather than character-by-character
+
+Writing reproducible code:
+	
+	http://adv-r.had.co.nz/Reproducibility.html

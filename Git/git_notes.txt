@@ -1,0 +1,9 @@
+Unstaging changes
+    * git checkout -- .
+        - gets rid of all unstaged changes and reverts back to original state of most recent commit
+
+Checking differences
+    * between branches: git diff branch1 branch2
+    * between branches and particular file: git diff branch1 branch2 -- filename
+
+

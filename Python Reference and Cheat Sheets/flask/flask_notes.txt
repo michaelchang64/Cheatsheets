@@ -1,0 +1,28 @@
+Creating a new Flask Project
+    1. Make a virtual environment (with requirements.txt to contain all necessary packages)
+        a. mkdir projectname
+        b. cd projectname
+        c. python -m venv venv
+        * to activate virtual environment, use 'source venv/bin/activate'
+        * to deactivate, simply execute 'deactivate'
+
+    2. Create a flask app named simply 'main.py' or 'app.py'
+        * add the following:
+
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+    3. Activate virtual environment if you haven't already, then add necessary libraries
+        a. source venv/bin/activate
+        b. pip install flask
+
+    4. Get all python package stuff and put into a requirements.txt
+        a. pip freeze > requirements.txt
+            - 'pip freeze' shows all installed packages
+            - '>' pipes all installed packages into file called requirements.txt
+
+    5. 'flask run' to test!

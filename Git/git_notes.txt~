@@ -22,4 +22,8 @@ Reverting back to past commits
     * git checkout hash filename
         - goes back to file at certain commit hash
 
-
+Reconciling merge conflicts
+    * it's actually really simple, just go on atom or something and choose whichever change is better
+    * once all changes are made, add the files that were flagged for merge conflicts then:
+        - git merge
+    * voila, now you can push

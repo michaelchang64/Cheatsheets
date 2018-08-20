@@ -22,4 +22,23 @@ Reverting back to past commits
     * git checkout hash filename
         - goes back to file at certain commit hash
 
+Reconciling merge conflicts
+    * it's actually really simple, just go on atom or something and choose whichever change is better
+    * once all changes are made, add the files that were flagged for merge conflicts then:
+        - git merge
+    * voila, now you can push
 
+Dealing with Branches
+    * create branches:
+        - git checkout -b branchname
+    * switch branches:
+        - git checkout existingbranchname
+    * delete branch
+        - git branch -d existingbranchname
+
+veRsiiOn coNtrOl
+    * before pushing your changes from a different branches to same branch (not master) then
+        - git pull origin master
+            * helps with not dealing with merge conflicts lol
+    * git merge
+        - when finding conflicts, use atom to deal with conflicts
